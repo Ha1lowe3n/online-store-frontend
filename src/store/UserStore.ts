@@ -1,16 +1,33 @@
 import { makeAutoObservable } from "mobx";
 
-export default class UserStore {
-    #isAuth: boolean;
-    #user: any;
+class UserStore {
+    _isAuth: boolean;
+    _user: any;
 
     constructor() {
-        this.#isAuth = false;
-        this.#user = {};
+        this._isAuth = false;
+        this._user = {};
         makeAutoObservable(this); // mobx следит за изменениями переменных
     }
 
+    // actions
     setIsAuth(bool: boolean) {
-        this.#isAuth = bool;
+        this._isAuth = bool;
+    }
+    setUser(user: any) {
+        this._user = user;
+    }
+
+    // getters
+    // вызываются только в том случае, если переменнная, которая используется внутри, была изменена
+    get isAuth() {
+        return this._isAuth;
+    }
+    get user() {
+        return this._user;
     }
 }
+
+const user = new UserStore();
+
+export default user;
