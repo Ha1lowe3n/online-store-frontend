@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
@@ -9,6 +9,7 @@ import { PathRoutes } from "../routes";
 
 const NavBar: React.FC = observer(() => {
     const { user } = useContext(Context);
+    const history = useHistory();
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -18,11 +19,16 @@ const NavBar: React.FC = observer(() => {
                 </NavLink>
                 {user.isAuth ? (
                     <Nav className="me-auto" style={{ color: "white" }}>
-                        <Button variant={"outline-light"}>Админ панель</Button>
                         <Button
                             variant={"outline-light"}
-                            onClick={() => user.setIsAuth(false)}
+                            onClick={() => history.push(PathRoutes.ADMIN_ROUTE)}
+                        >
+                            Админ панель
+                        </Button>
+                        <Button
+                            variant={"outline-light"}
                             className={"ml-2"}
+                            onClick={() => history.push(PathRoutes.LOGIN_ROUTE)}
                         >
                             Выйти
                         </Button>
@@ -31,7 +37,7 @@ const NavBar: React.FC = observer(() => {
                     <Nav className="me-auto" style={{ color: "white" }}>
                         <Button
                             variant={"outline-light"}
-                            onClick={() => user.setIsAuth(true)}
+                            onClick={() => history.push(PathRoutes.LOGIN_ROUTE)}
                         >
                             Войти
                         </Button>
