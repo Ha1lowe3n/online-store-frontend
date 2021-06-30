@@ -1,7 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
-type Types = Array<{ id: number; name: string }>;
-type Brands = Array<{ id: number; name: string }>;
+type TypeBrandType = { id: number; name: string };
+type Types = Array<TypeBrandType>;
+type Brands = Array<TypeBrandType>;
 type Devices = Array<{
     id: number;
     name: string;
@@ -14,11 +15,14 @@ export default class DeviceStore {
     _types: Types;
     _brands: Brands;
     _devices: Devices;
+    _selectedType: TypeBrandType;
 
     constructor() {
         this._types = [
             { id: 1, name: "Холодильники" },
             { id: 2, name: "Смартфоны" },
+            { id: 3, name: "Ноутбуки" },
+            { id: 4, name: "Телевизоры" },
         ];
         this._brands = [
             { id: 1, name: "Samsung" },
@@ -47,6 +51,7 @@ export default class DeviceStore {
                 img: "https://cdn.kitchen-time.ru/products/original/bb58326a0c8e2957ccff0a340bf2b49e.jpg",
             },
         ];
+        this._selectedType = {} as TypeBrandType;
         makeAutoObservable(this);
     }
 
@@ -60,6 +65,9 @@ export default class DeviceStore {
     setDevices(devices: Devices) {
         this._devices = devices;
     }
+    setSelectedType(type: TypeBrandType) {
+        this._selectedType = type;
+    }
 
     // getters
     get types() {
@@ -70,5 +78,8 @@ export default class DeviceStore {
     }
     get devices() {
         return this._devices;
+    }
+    get selectedType() {
+        return this._selectedType;
     }
 }
