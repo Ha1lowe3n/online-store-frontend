@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
 import { authRoutes, PathRoutes, publicRoutes } from "../routes";
-import user from "../store/UserStore";
+import { Context } from "../index";
 
 const AppRouter: React.FC = observer(() => {
-    console.log(user);
+    const { user } = useContext(Context);
+
     return (
         <Switch>
             {user.isAuth &&

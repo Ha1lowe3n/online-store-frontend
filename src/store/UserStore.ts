@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
 
-class UserStore {
+export default class UserStore {
     _isAuth: boolean;
     _user: any;
 
     constructor() {
-        this._isAuth = false;
+        this._isAuth = true;
         this._user = {};
         makeAutoObservable(this); // mobx следит за изменениями переменных
     }
@@ -27,7 +27,3 @@ class UserStore {
         return this._user;
     }
 }
-
-const user = new UserStore();
-
-export default user;

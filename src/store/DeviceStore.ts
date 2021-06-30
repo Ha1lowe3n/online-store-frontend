@@ -10,7 +10,7 @@ type Devices = Array<{
     img: string;
 }>;
 
-class DeviceStore {
+export default class DeviceStore {
     _types: Types;
     _brands: Brands;
     _devices: Devices;
@@ -72,7 +72,3 @@ class DeviceStore {
         return this._devices;
     }
 }
-
-const device = new DeviceStore();
-
-export default device;
