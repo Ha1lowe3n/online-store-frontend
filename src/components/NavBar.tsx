@@ -6,10 +6,17 @@ import { Button, Container, Nav, Navbar } from "react-bootstrap";
 
 import { Context } from "../index";
 import { PathRoutes } from "../routes";
+import { UserType } from "../store/UserStore";
 
 const NavBar: React.FC = observer(() => {
     const { user } = useContext(Context);
     const history = useHistory();
+
+    const logOut = () => {
+        user.setUser({} as UserType);
+        user.setIsAuth(false);
+        history.push(PathRoutes.LOGIN_ROUTE);
+    };
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -32,10 +39,7 @@ const NavBar: React.FC = observer(() => {
                         <Button
                             variant={"outline-light"}
                             className={"ml-2"}
-                            onClick={() => {
-                                history.push(PathRoutes.LOGIN_ROUTE);
-                                user.setIsAuth(false);
-                            }}
+                            onClick={logOut}
                         >
                             Выйти
                         </Button>

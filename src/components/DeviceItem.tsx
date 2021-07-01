@@ -28,7 +28,11 @@ const DeviceItem: React.FC<DeviceItemPropsType> = ({
             onClick={() => history.push(`${PathRoutes.DEVICE_ROUTE}/${id}`)}
         >
             <Card style={{ width: 150, cursor: "pointer" }} border={"light"}>
-                <Image width={150} height={150} src={img} />
+                <Image
+                    width={150}
+                    height={150}
+                    src={process.env.REACT_APP_API_URL + img}
+                />
                 <div
                     className={
                         "d-flex justify-content-between align-items-center"

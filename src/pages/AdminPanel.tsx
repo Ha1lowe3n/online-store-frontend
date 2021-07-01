@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Button, Container } from "react-bootstrap";
 
 import CreateType from "../components/modals/CreateType";
 import CreateBrand from "../components/modals/CreateBrand";
 import CreateDevice from "../components/modals/CreateDevice";
+import { Context } from "../index";
+import { Redirect } from "react-router-dom";
+import { PathRoutes } from "../routes";
 
 const AdminPanel: React.FC = () => {
     const [brandVisible, setBrandVisible] = useState(false);
     const [typeVisible, setTypeVisible] = useState(false);
     const [deviceVisible, setDeviceVisible] = useState(false);
+
+    const { user } = useContext(Context);
+
+    if (user.user.role !== "ADMIN") {
+        return <Redirect to={PathRoutes.SHOP_ROUTE} />;
+    }
 
     return (
         <Container className={"d-flex flex-column align-items-center"}>
