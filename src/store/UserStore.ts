@@ -1,12 +1,20 @@
 import { makeAutoObservable } from "mobx";
 
+export type UserType = {
+    id: number;
+    email: string;
+    role: string;
+    iat: number;
+    exp: number;
+};
+
 export default class UserStore {
     _isAuth: boolean;
-    _user: any;
+    _user: UserType;
 
     constructor() {
-        this._isAuth = true;
-        this._user = {};
+        this._isAuth = false;
+        this._user = {} as UserType;
         makeAutoObservable(this); // mobx следит за изменениями переменных
     }
 
@@ -14,7 +22,7 @@ export default class UserStore {
     setIsAuth(bool: boolean) {
         this._isAuth = bool;
     }
-    setUser(user: any) {
+    setUser(user: UserType) {
         this._user = user;
     }
 
